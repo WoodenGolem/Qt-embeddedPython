@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>astolfo.jpg</file>
+    </qresource>
+</RCC>

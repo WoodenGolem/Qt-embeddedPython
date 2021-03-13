@@ -1,1 +1,8 @@
 *.user
+debug
+release
+Makefile
+*.Debug
+*.Release
+*.stash
+ui*
