@@ -10,10 +10,12 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    pythoninterpreter.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    pythoninterpreter.h
 
 FORMS += \
     mainwindow.ui

@@ -17,6 +17,13 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_pushButton_startPyInt_clicked();
+
+    void on_pushButton_killPyInt_clicked();
+
+    void on_pushButton_guiResponseTest_clicked();
+
 private:
     Ui::MainWindow *ui;
 
