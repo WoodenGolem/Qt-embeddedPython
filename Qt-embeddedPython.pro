@@ -17,8 +17,18 @@ HEADERS += \
 
 FORMS += \
     mainwindow.ui
+	
+INCLUDEPATH += \
+    C:\Users\alexa\AppData\Local\Programs\Python\Python39\include
+
+LIBS += \
+    C:\Users\alexa\AppData\Local\Programs\Python\Python39\libs\python39.lib
+    
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    ressources.qrc
