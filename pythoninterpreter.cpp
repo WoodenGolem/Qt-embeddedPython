@@ -20,6 +20,11 @@ PythonInterpreter* PythonInterpreter::instance() {
 PythonInterpreter::PythonInterpreter() {
     Py_Initialize();
 
+    FILE* file = _Py_fopen("catch_output.py", "r+");
+    if (file != nullptr) {
+        PyRun_SimpleFileEx(file, "catch_output.py", 1);
+    }
+
     std::cout << "[PythonInterpreter] New PythonInterpreter created." << std::endl;
 }
 
@@ -64,6 +69,7 @@ void PythonInterpreter::terminateExecution() {
         PyGILState_STATE GILState = PyGILState_Ensure();
         PyErr_SetString(PyExc_Exception, "INTERRUPT REQUESTED FROM GUI");
         PyGILState_Release(GILState);
+
     } else {
         std::cout << "[PythonInterpreter] No script running. Guess ill go to sleep now... Forever..." << std::endl;
         this->~PythonInterpreter();
