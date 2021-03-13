@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <QThread>
+#include <ctime>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -20,7 +21,7 @@ MainWindow::~MainWindow() {
 
 
 void MainWindow::on_pushButton_startPyInt_clicked() {
-    static QThread* pyIntThread = new QThread();
+    static QThread* pyIntThread = new QThread;
 
     if (pyIntThread->isRunning()) {
         std::cout << "[MainWindow] PythonInterpreterThread is already running!" << std::endl;
@@ -32,7 +33,7 @@ void MainWindow::on_pushButton_startPyInt_clicked() {
 
     connect(pyIntThread, SIGNAL (started()),  pyInt,       SLOT (process()));
     connect(pyInt,       SIGNAL (finished()), pyIntThread, SLOT (quit()));
-    // connect(pyInt,       SIGNAL (finished()), pyIntThread, SLOT (deleteLater()));
+    //connect(pyInt,       SIGNAL (finished()), pyIntThread, SLOT (deleteLater()));
 
     pyIntThread->start();
 }
