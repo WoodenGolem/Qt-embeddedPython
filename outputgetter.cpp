@@ -47,6 +47,7 @@ void OutputGetter::process() {
     long timestamp = time(nullptr);
     while (not this->terminationRequested) {
         if (time(nullptr) - timestamp > 1) {
+            // Check if new output line is available
             PyGILState_STATE GILState = PyGILState_Ensure();
             PY_lineAvailable = PyObject_GetAttrString(static_cast<PyObject*>(this->PY_catchOutErr), "lineAvailable");
             PyGILState_Release(GILState);
@@ -54,6 +55,7 @@ void OutputGetter::process() {
         }
 
         if (PyObject_IsTrue(PY_lineAvailable)) {
+            // Read next line of output if available
             PyGILState_STATE GILState = PyGILState_Ensure();
 
             PyObject* updaterMethod = PyObject_GetAttrString(static_cast<PyObject*>(this->PY_catchOutErr), "update");
@@ -61,6 +63,7 @@ void OutputGetter::process() {
 
             PyObject* outputLine = PyObject_GetAttrString(static_cast<PyObject*>(this->PY_catchOutErr), "currentLine");
             PyObject* encodedString = PyUnicode_AsEncodedString(outputLine, "utf-8", "strict");
+            // Print the extracted line
             std::cout << "Extracted Line: " << PyBytes_AsString(encodedString) << std::endl;
 
             PY_lineAvailable = PyObject_GetAttrString(static_cast<PyObject*>(this->PY_catchOutErr), "lineAvailable");
